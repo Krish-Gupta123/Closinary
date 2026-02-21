@@ -11,7 +11,7 @@ const listingSchema = new Schema({
         type: String,
         default: "https://unsplash.com/photos/modern-skyscraper-with-glass-facade-against-cloudy-sky-lEsfGOaF4nY",
         set(v) {
-            v === ""
+            return v === ""
                 ? "https://unsplash.com/photos/a-pool-of-water-surrounded-by-rocks-and-trees-zo_udYMcaVc"
                 : v
         },
