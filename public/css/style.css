@@ -5,6 +5,13 @@ body {
     min-height: 100vh;
 }
 
+body>.container {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+}
 
 /* navbar */
 .navbar {
