@@ -7,6 +7,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const wrapAsync = require('./utils/wrapAsync.js');
 const ExpressError = require('./utils/ExpressError.js');
+const { listingSchema } = require('./schema.js');
 
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/closinary';
@@ -51,8 +52,9 @@ app.get('/listings/:id', wrapAsync(async (req, res) => {
 
 // create route
 app.post('/listings', wrapAsync(async (req, res) => {
-    if (!req.body.listing) {
-        throw new ExpressError(400, "Send a valid data for listing");
+    let result = listingSchema.validate(req.body);
+    if (result.error) {
+        throw new ExpressError(400, result.error);
     }
     const newListing = new Listing(req.body.listing);
     await newListing.save();

@@ -17,7 +17,11 @@ const listingSchema = new Schema({
         },
         get(v) { return v || "https://unsplash.com/photos/modern-skyscraper-with-glass-facade-against-cloudy-sky-lEsfGOaF4nY" }
     },
-    price: Number,
+    price: {
+        type: Number,
+        required: [true, 'Price is required'],
+        min: [0, 'Price must be a positive number']
+    },
     location: String,
     country: String,
 })
